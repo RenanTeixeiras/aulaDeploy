@@ -153,17 +153,28 @@ p {
     <!-- Barra de navegação -->
     <nav class="navbar">
         <ul>
-            <li><a href="{{url_for('login')}}">Login</a></li>
+            <li><a href="{{url_for('criar_usuario')}}">Cadastro</a></li>
             <li><a href="#sobre">Sobre</a></li>
             <li><a href="#contato">Contato</a></li>
         </ul>
     </nav>
 
     <!-- Seção de Login -->
-    <div id="cadastro" class="container">
+    <div id="Login" class="container">
         <div class="form-container">
-            <h2>Cadastro</h2>
-            <form action="{{url_for('criar_usuario')}}" method="POST">
+            <h2>Login</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+            <form action="{{url_for('login')}}" method="POST">
                 <div class="input-group">
                     <label for="nome">Nome</label>
                     <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
@@ -172,7 +183,7 @@ p {
                     <label for="senha">Senha</label>
                     <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
                 </div>
-                <button type="submit" class="btn">Entrar</button>
+                <button type="submit" class="btn">Logar</button>
             </form>
         </div>
     </div>
